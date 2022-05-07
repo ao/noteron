@@ -17,16 +17,19 @@ export default function Sidebar(props) {
     cursor: pointer;
   `;
 
+  const notes = [];
+  props.notes.map((data) => {
+    notes.push(
+      <div onClick={() => props.openNote({ uuid: data.uuid })}>{data.title}</div>
+    );
+  });
+
   return (
     <SidebarContainer>
       <div>
         <Button onClick={() => props.newNote()}>Add Note +</Button>
       </div>
-      <div>
-        <div onClick={() => props.openNote({ id: 1 })}>Note1</div>
-        <div onClick={() => props.openNote({ id: 2 })}>Note2</div>
-        <div onClick={() => props.openNote({ id: 3 })}>Note3</div>
-      </div>
+      <div>{notes}</div>
     </SidebarContainer>
   );
 }

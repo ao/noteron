@@ -1,10 +1,16 @@
 import styled from 'styled-components';
-import { forwardRef, useImperativeHandle, useState } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import { TheEditor } from './TheEditor';
 import { v4 as uuidv4 } from 'uuid';
 
 export const Content = forwardRef((props, ref) => {
-  const [note, setNote] = useState({});
+  const [note, setNote] = useState({ uuid: uuidv4(), title: '', body: '' });
+
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     props.saveNote(note);
+  //   }, 5000);
+  // });
 
   useImperativeHandle(ref, () => ({
     newNote() {
@@ -16,15 +22,19 @@ export const Content = forwardRef((props, ref) => {
   }));
 
   function createNewNote() {
-    console.log('new note!!!!!!!!!!!');
     setNote({
-      id: uuidv4(),
-      title: 'test',
-      body: 'test2',
+      uuid: uuidv4(),
+      title: '',
+      body: '',
     });
   }
   function openExistingNote(props) {
-    console.log('open existing note!!!!!', props);
+    console.log(props)
+    setNote(props)
+  }
+  function saveNote(data: object) {
+    if (data.uuid==undefined) data.uuid = uuidv4()
+    props.saveNote(data);
   }
 
   const ContentContainer = styled.div`
@@ -34,7 +44,7 @@ export const Content = forwardRef((props, ref) => {
   `;
   return (
     <ContentContainer>
-      <TheEditor data={note} />
+      <TheEditor data={note} saveNote={saveNote} />
     </ContentContainer>
   );
 });

@@ -1,7 +1,7 @@
 import Editor from 'rich-markdown-editor';
 import styled from 'styled-components';
 
-export const TheEditor = () => {
+export const TheEditor = (props) => {
   const Title = styled.input`
     width: 100%;
     padding: 5px;
@@ -10,8 +10,8 @@ export const TheEditor = () => {
   `;
   return (
     <>
-      <Title placeholder="note title.." />
-      <Editor placeholder="your note.." />
+      <Title placeholder="note title.." value={props.title} />
+      <Editor placeholder="your note.." value={props.body} />
     </>
   );
 };

@@ -9,15 +9,17 @@ export default function Wrapper() {
   `;
 
   function newNote() {
-    console.log('new note!');
     childRef.current.newNote();
+  }
+  function openNote(props) {
+    childRef.current.openNote(props);
   }
 
   const childRef = useRef();
 
   return (
     <WrapperContainer>
-      <Sidebar newNote={newNote} />
+      <Sidebar newNote={newNote} openNote={openNote} />
       <Content ref={childRef} />
     </WrapperContainer>
   );

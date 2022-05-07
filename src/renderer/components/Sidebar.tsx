@@ -23,9 +23,9 @@ export default function Sidebar(props) {
         <Button onClick={() => props.newNote()}>Add Note +</Button>
       </div>
       <div>
-        <div>Note1</div>
-        <div>Note2</div>
-        <div>Note3</div>
+        <div onClick={() => props.openNote({ id: 1 })}>Note1</div>
+        <div onClick={() => props.openNote({ id: 2 })}>Note2</div>
+        <div onClick={() => props.openNote({ id: 3 })}>Note3</div>
       </div>
     </SidebarContainer>
   );
